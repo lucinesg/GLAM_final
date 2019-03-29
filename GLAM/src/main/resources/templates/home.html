@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width,">
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="app.js"></script>
+
+</head>
+
+<body>
+    <header class="navbar navbar-light fixed-top" id="navBarColor">
+        <div id="navBarLogo">
+            <a href="/AdminLogin"></a>
+        </div>
+        <img src="logoWithNameWhite.png" width="105px" height="40px" alt="logo" margin-right="0">
+    </header>
+
+    <main role="main" class="container-fluid" id="main-app">
+        <div id="buttonDiv">
+            <button type="button" class="btn btn-warning btn-lg btn-block" data-toggle="modal"
+                data-target="#exampleModal" data-whatever="@mdo">Emergency</button>
+        </div>
+        <!-- Modal for emergency alert information -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ALERT!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div> You will now open up a chat directly with the police. </div>
+                        <div>Do you want to continue? </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-warning btn-lg btn-block" data-toggle="modal"
+                            data-target="#exampleModal1" data-whatever="@mdo">Start Livechat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">LiveChat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="chatbox-container" class="col-md-12 table-wrapper-scroll-y">
+
+                                    <table id="conversation" class="table table-bordered table-striped">
+                                        <tr>
+                                            <td> Hi my name is police officer Jones, how can I assist? </td>
+                                        </tr>
+                                        <tbody id="greetings">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-16">
+                                <div id="lower-container" class="container">
+                                    <form onsubmit="document.getElementById('text').value= ''">
+                                        <div class="row">
+                                            <div class="col-md-8 col-sm-10">
+                                                <input type="text" id="text" class="form-control" autocomplete="off">
+                                            </div>
+
+                                            <div class="col-md-1 col-sm-10" style="margin-top:10px">
+                                                <button id="sendbtn" class="btn btn-outline-secondary"
+                                                    type="submit">Send</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="logo-main-container">
+            <img class="logo-main-container" src="nameAndLogo2.png" alt="logo">
+        </div>
+
+        <div id="buttonDiv">
+            <a href="/ChooseCategory">
+                <button type="button" class="btn btn-secondary btn-lg btn-block"
+                    style="background-color: #434343e3">Leave a
+                    tip</button> </a>
+        </div>
+
+    </main>
+    <footer class="footer-home">
+        <div class="card-footer text-muted mx-auto">
+            <a href="#">Terms & Conditions</a>
+        </div>
+    </footer>
+
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

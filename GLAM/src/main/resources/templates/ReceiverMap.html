@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+	<meta charset="UTF-8">
+	<title>MapView</title>
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+	<nav class="navbar navbar-light" id="navBarColor">
+		<div id="navBarLogo">
+			<a style="margin-right: 5%" href="/PoliceProfile">Back</a>
+
+			<img src="logoWithNameWhite.png" width="100px" height="40px" alt="logo">
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div id="map" style="height:500px; width:auto;"></div>
+	</div>
+	<script th:inline="javascript">
+		function initMap() {
+
+			var tips = [];
+			var listLat = [];
+			var listLng = [];
+			var allmarkers = [];
+			var i = 0;
+			/*<![CDATA[*/
+			/*[# th:each="tip : ${tipsList}"]*/
+			var oneTip = [];
+
+			oneTip.push(/*[[${tip.id}]]*/);
+			oneTip.push(/*[[${tip.category_of_suspicion}]]*/);
+			oneTip.push(/*[[${tip.type_of_suspicion}]]*/);
+			oneTip.push(/*[[${tip.subtype_of_suspicion}]]*/);
+			oneTip.push(/*[[${tip.details}]]*/);
+			oneTip.push(/*[[${tip.media}]]*/);
+			oneTip.push(/*[[${tip.address}]]*/);
+			oneTip.push(/*[[${tip.latitude}]]*/);
+			oneTip.push(/*[[${tip.longitude}]]*/);
+			oneTip.push(/*[[${tip.date1}]]*/);
+			oneTip.push(/*[[${tip.time1}]]*/);
+
+			tips.push(oneTip);
+
+			listLat.push(parseFloat(/*[[${tip.latitude}]]*/));
+			listLng.push(parseFloat(/*[[${tip.longitude}]]*/));
+
+			/*[/]*/
+			/*]]>*/
+
+			for (var i = 0; i < listLat.length; i++) {
+				allmarkers.push(new google.maps.LatLng(listLat[i], listLng[i]));
+			}
+
+			var center_lat = (Math.max(...listLat) + Math.min(...listLat)) / 2
+			var center_lng = (Math.max(...listLng) + Math.min(...listLng)) / 2
+			var my_center = { lat: center_lat, lng: center_lng };
+
+
+			var map = new google.maps.Map(
+				document.getElementById('map'), { zoom: 5, center: my_center });
+
+			var i = 0;
+			var markers = allmarkers.map(function (location) {
+
+				var marker = new google.maps.Marker({
+					position: location
+				});
+				var data = 'TipID: ' + tips[i][0] + '<br>Type: ' + tips[i][1] + ', ' + tips[i][2] + '<br>Address: ' + tips[i][6] + '<br> Date: ' + tips[i][9];
+
+				marker.addListener('click', function () {
+					if (!this.infoWindow) {
+						this.infoWindow = new google.maps.InfoWindow({
+							content: data
+						})
+					}
+					this.infoWindow.open(map, this);
+				})
+
+				i++;
+				return marker;
+			});
+
+			var markerCluster = new MarkerClusterer(map, markers,
+				{ imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+
+		}
+
+	</script>
+	<script
+		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+		</script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDSEXBIq9OvQbY9CyAHJ8zpVsSaIcvtM&libraries&callback=initMap">
+		</script>
+</body>
+
+</html>

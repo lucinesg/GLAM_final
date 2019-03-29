@@ -1,0 +1,13 @@
+#styling chatbody{
+position: relative;
+background-color: white;
+animation-name: highlight;
+animation-duration: 1s;
+}
+
+@keyframes highlight{
+
+0% {background-color:white; left:0px; top:0px;}
+10% {background-color:grey; left:0px; top:0px;}
+100% {background-color:white; left:0px; top:0px;}
+}
